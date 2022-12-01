@@ -41,47 +41,105 @@ function gameState(knightHP, dragonHP, knightHPInit, dragonHPInit){
     if (dragonHP < dragonHPInit * 30 / 100) dragonImg = "dragon-wounded";
 
     if (knightHP <= 0){
-        document.write("<div class=\"game-state\">\n<figure class=\"game-state_player\">\n<img src=\"images/"+ knightImg +".png\" alt=\"Chevalier\">\n<figcaption>Game Over</figcaption>\n</figure>\n<figure class=\"game-state_player\">\n<img src=\"images/"+ dragonImg +".png\" alt=\"Dragon\">\n<figcaption>\n<progress max=\""+ dragonHPInit +"\" value=\""+ dragonHP +"\"></progress>\n"+ dragonHP +"PV</figcaption>\n</figure>\n</div>\n<footer>\n<h3>Fin de la partie</h3>\n<figure class=\"game-end\">\n<figcaption>Vous avez perdu le combat, le dragon vous a carbonisé !</figcaption>\n<img src=\"images/dragon-winner.png\" alt=\"Dragon vainqueur\">\n</figure>\n</footer>\n");
+        document.write(`
+            <div class="game-state">
+                <figure class="game-state_player">
+                    <img src="images/${knightImg}.png" alt="Chevalier">
+                    <figcaption>Game Over</figcaption>
+                </figure>
+                <figure class="game-state_player">
+                    <img src="images/${dragonImg}.png" alt="Dragon">
+                    <figcaption><progress max="${dragonHPInit}" value="${dragonHP}"></progress>${dragonHP}PV</figcaption>
+                </figure>
+            </div>
+            <footer>
+                <h3>Fin de la partie</h3>
+                <figure class="game-end">
+                    <figcaption>Vous avez perdu le combat, le dragon vous a carbonisé !</figcaption>
+                    <img src="images/dragon-winner.png" alt="Dragon vainqueur">
+                </figure>
+            </footer>`);
     }
     else if (dragonHP <= 0){
-        document.write("<div class=\"game-state\">\n<figure class=\"game-state_player\">\n<img src=\"images/"+ knightImg +".png\" alt=\"Chevalier\">\n<figcaption>\n<progress max=\""+ knightHPInit +"\" value=\""+ knightHP +"\"></progress>\n"+ knightHP +"PV</figcaption>\n</figure>\n<figure class=\"game-state_player\">\n<img src=\"images/"+ dragonImg +".png\" alt=\"Dragon\">\n<figcaption>Game Over</figcaption>\n</figure>\n</div>\n<footer>\n<h3>Fin de la partie</h3>\n<figure class=\"game-end\">\n<figcaption>Vous avez gagné le combat, le dragon a été vaincu !</figcaption>\n<img src=\"images/knight-winner.png\" alt=\"Dragon vainqueur\">\n</figure>\n</footer>\n");
+        document.write(`
+            <div class="game-state">
+                <figure class="game-state_player">
+                    <img src="images/"${knightImg}.png" alt="Chevalier">
+                    <figcaption><progress max="${knightHPInit}" value="${knightHP}"></progress>${knightHP}PV</figcaption>
+                </figure>
+                <figure class="game-state_player">
+                    <img src="images/${dragonImg}.png" alt="Dragon">
+                    <figcaption>Game Over</figcaption>
+                </figure>
+            </div>
+            <footer>
+                <h3>Fin de la partie</h3>
+                <figure class="game-end">
+                    <figcaption>Vous avez gagné le combat, le dragon a été vaincu !</figcaption>
+                    <img src="images/knight-winner.png" alt="Dragon vainqueur">
+                </figure>
+            </footer>`);
     }
     else {
-        document.write("<div class=\"game-state\">\n<figure class=\"game-state_player\">\n<img src=\"images/"+ knightImg +".png\" alt=\"Chevalier\">\n<figcaption>\n<progress max=\""+ knightHPInit +"\" value=\""+ knightHP +"\"></progress>\n"+ knightHP +"PV</figcaption>\n</figure>\n<figure class=\"game-state_player\">\n<img src=\"images/"+ dragonImg +".png\" alt=\"Dragon\">\n<figcaption>\n<progress max=\""+ dragonHPInit +"\" value=\""+ dragonHP +"\"></progress>\n"+ dragonHP +"PV</figcaption>\n</figure>\n</div>\n");
+        document.write(`
+            <div class="game-state">
+                <figure class="game-state_player">
+                    <img src="images/${knightImg}.png" alt="Chevalier">
+                    <figcaption><progress max="${knightHPInit}" value="${knightHP}"></progress>${knightHP}PV</figcaption>
+                </figure>
+                <figure class="game-state_player">
+                    <img src="images/${dragonImg}.png" alt="Dragon">
+                    <figcaption><progress max="${dragonHPInit}" value="${dragonHP}"></progress>${dragonHP}PV</figcaption>
+                </figure>
+            </div>`
+            );
     }
 }
 
 function gameRound(knightInit, knightAtk, dragonAtk, tour){
-    document.write("<h3>Tour n°"+ tour +"</h3>\n<figure class=\"game-round\">\n");
     if (knightInit){
-        document.write("<img src=\"images/knight-winner.png\" alt=\"Chevalier vainqueur\">\n<figcaption>Vous êtes le plus rapide, vous attaquez le dragon et lui infligez "+ knightAtk +" points de dommage !</figcaption>\n")
+        document.write(`
+            <h3>Tour n°${tour}</h3>
+            <figure class="game-round">
+                <img src="images/knight-winner.png" alt="Chevalier vainqueur">
+                <figcaption>Vous êtes le plus rapide, vous attaquez le dragon et lui infligez ${knightAtk} points de dommage !</figcaption>
+            </figure>`)
     }
     else{
-        document.write("<img src=\"images/dragon-winner.png\" alt=\"Dragon vainqueur\">\n<figcaption>Le dragon prend l'initiative, vous attaque et vous inflige "+ dragonAtk +" points de dommage !</figcaption>\n")
+        document.write(`
+            <h3>Tour n°${tour}</h3>
+            <figure class="game-round">
+                <img src="images/dragon-winner.png" alt="Dragon vainqueur">
+                <figcaption>Le dragon prend l'initiative, vous attaque et vous inflige ${dragonAtk} points de dommage !</figcaption>
+            </figure>`)
     }
-    document.write("</figure>\n");
+}
+
+function init(){
+    do{
+        difficulty = prompt("Difficulté ?").toLowerCase();
+    }while(!(difficulty == "facile" || difficulty == "normal" || difficulty == "difficile"))
+
+    do{
+        playerClass = prompt("Choississez une classe entre: Chevalier, Voleur, Mage").toLowerCase();
+    }while(!(playerClass == "chevalier" || playerClass == "voleur" || playerClass == "mage"))
+
+    if (difficulty == "difficile") knightHP = 100 + dice(7,10);
+    else knightHP = 100 + dice(10,10);
+
+    if (difficulty == "facile") dragonHP = 100 + dice(5,10);
+    else dragonHP = 100 + dice(10,10);
 }
 
 /***************************************************************************/
 /* *************************** CODE PRINCIPAL **************************** */
 /***************************************************************************/
 let difficulty;
-do{
-    difficulty = prompt("Difficulté ?").toLowerCase();
-}while(!(difficulty == "facile" || difficulty == "normal" || difficulty == "difficile"))
-
 let playerClass;
-do{
-    playerClass = prompt("Choississez une classe entre: Chevalier, Voleur, Mage").toLowerCase();
-}while(!(playerClass == "chevalier" || playerClass == "voleur" || playerClass == "mage"))
+let knightHP;
+let dragonHP;
 
-let knightHP = 100;
-if (difficulty == "difficile") knightHP += dice(7,10);
-else knightHP += dice(10,10);
-
-let dragonHP = 100;
-if (difficulty == "facile") dragonHP += dice(5,10);
-else dragonHP += dice(10,10);
+init();
 
 const knightHPInit = knightHP;
 const dragonHPInit = dragonHP;
