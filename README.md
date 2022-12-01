@@ -114,4 +114,4 @@ Chaque classe a une particularité :
 Bonus n°3 : jauges de points de vie
 -----------------------------------
 Afficher les points de vie restants de chaque personnage dans une jauge qui reflète le pourcentage de points de vie restants.
-S'il reste à un personnage la moitié de ses points de vie de départ, la jauge sera remplie à 50%.# JS-DragonSlayer
+S'il reste à un personnage la moitié de ses points de vie de départ, la jauge sera remplie à 50%.
